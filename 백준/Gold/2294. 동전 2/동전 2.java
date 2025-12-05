@@ -9,21 +9,22 @@ class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        int min = Integer.MAX_VALUE;
 
+        int[] arr = new int[N];
         int[] dp = new int[100001];
-        int[] coin = new int[N];
-        for(int i = 0; i < N; i++){
-            coin[i] = Integer.parseInt(br.readLine());
-        }
-
+        int min = Integer.MAX_VALUE;
+        
         Arrays.fill(dp, 100001);
+
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(br.readLine());
+        }
         dp[0] = 0;
 
-        for(int i = 0; i <= K; i++){
-            for(int c : coin){
-                if(i - c >= 0){
-                    dp[i] = Math.min(dp[i], dp[i - c] + 1);
+        for(int i = 1; i <= K; i++){
+            for(int coin : arr){
+                if(i - coin >= 0){
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                 }
             }
         }
