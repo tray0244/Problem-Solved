@@ -16,10 +16,8 @@ class Main {
         for(int i = 0; i < N; i++){
             coin[i] = Integer.parseInt(br.readLine());
         }
-        
-        for(int i = 1; i < 100001; i++){
-            dp[i] = 100001;
-        }
+
+        Arrays.fill(dp, 100001);
         dp[0] = 0;
 
         for(int i = 0; i <= K; i++){
