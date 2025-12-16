@@ -1,16 +1,32 @@
 import java.util.*;
 
+import java.util.*;
+import java.io.*;
+
 public class Main {
     static int N, M;
     static boolean[] visited;
     static int[] result;
+    static StringBuilder sb = new StringBuilder();
     
-    public static void backtrack(int depth) {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        
+        visited = new boolean[N + 1];
+        result = new int[M];
+        
+        search(0);
+        System.out.println(sb);
+    }
+    public static void search(int depth) {
         if (depth == M) {
             for (int num : result) {
-                System.out.print(num + " ");
+                sb.append(num).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
             return;
         }    
         
@@ -18,21 +34,11 @@ public class Main {
             if (!visited[i]) {
                 visited[i] = true; 
                 result[depth] = i; 
-                backtrack(depth + 1); 
+                search(depth + 1); 
                 
                 visited[i] = false;
             }
         }
     }
     
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
-        
-        visited = new boolean[N + 1];
-        result = new int[M];
-        
-        backtrack(0);
-    }
 }
