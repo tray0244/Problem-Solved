@@ -1,8 +1,3 @@
-SELECT 
-    ANIMAL_ID, 
-    NAME, 
-    DATETIME
-FROM ANIMAL_INS
-ORDER BY 
-    NAME ASC, 
-    DATETIME DESC;
+select animal_id, name, datetime
+from animal_ins
+order by name asc, datetime desc;
