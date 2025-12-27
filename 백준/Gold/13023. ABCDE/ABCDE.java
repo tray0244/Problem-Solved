@@ -11,6 +11,7 @@ class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         visited = new boolean[N];
+
         list = new ArrayList[N];
         for(int i = 0; i < N; i++){
             list[i] = new ArrayList<>();
@@ -38,7 +39,6 @@ class Main {
             System.out.println(1);
             System.exit(0);
         }
-
 
         for(int next : list[start]){
             if(!visited[next]){
