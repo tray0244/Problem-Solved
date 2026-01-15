@@ -4,21 +4,17 @@ import java.io.*;
 class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int T = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < T; i++) {
-            StringBuilder sb = new StringBuilder();
+        while (T-- > 0) {
             String p = br.readLine();
             int n = Integer.parseInt(br.readLine());
-            String arrInput = br.readLine();
-            arrInput = arrInput.substring(1, arrInput.length() - 1);
 
-            List<Integer> list = new ArrayList<>();
-            if (!arrInput.isEmpty()) {
-                String[] nums = arrInput.split(",");
-                for (String num : nums) {
-                    list.add(Integer.parseInt(num));
-                }
+            StringTokenizer st = new StringTokenizer(br.readLine(), "[],");
+            ArrayDeque<Integer> deque = new ArrayDeque<>();
+            for (int i = 0; i < n; i++) {
+                deque.add(Integer.parseInt(st.nextToken()));
             }
 
             boolean isReversed = false;
@@ -27,33 +23,34 @@ class Main {
             for (char cmd : p.toCharArray()) {
                 if (cmd == 'R') {
                     isReversed = !isReversed;
-                } else if (cmd == 'D') {
-                    if (list.isEmpty()) {
-                        System.out.println("error");
+                } else {
+                    if (deque.isEmpty()) {
                         isError = true;
                         break;
                     }
-                    if (!isReversed) list.remove(0);
-                    else list.remove(list.size() - 1);
+                    if (isReversed) {
+                        deque.pollLast();
+                    } else {
+                        deque.pollFirst();
+                    }
                 }
             }
 
-            if (isError) continue;
-
-            sb.append("[");
-            if (isReversed) {
-                for (int j = list.size() - 1; j >= 0; j--) {
-                    sb.append(list.get(j));
-                    if (j != 0) sb.append(",");
-                }
+            if (isError) {
+                sb.append("error\n");
             } else {
-                for (int j = 0; j < list.size(); j++) {
-                    sb.append(list.get(j));
-                    if (j != list.size() - 1) sb.append(",");
-                }
+                appendResult(deque, isReversed, sb);
             }
-            sb.append("]");
-            System.out.println(sb.toString());
         }
+        System.out.print(sb);
+    }
+
+    private static void appendResult(ArrayDeque<Integer> deque, boolean isReversed, StringBuilder sb) {
+        sb.append("[");
+        while (!deque.isEmpty()) {
+            sb.append(isReversed ? deque.pollLast() : deque.pollFirst());
+            if (!deque.isEmpty()) sb.append(",");
+        }
+        sb.append("]\n");
     }
 }
