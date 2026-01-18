@@ -2,63 +2,70 @@ import java.util.*;
 import java.io.*;
 
 public class Main{
-    static int n, num;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
-        Deque<Integer> d = new ArrayDeque<>();
-        n = 0;
+        ArrayDeque<Integer> dq = new ArrayDeque<Integer>();
+        
         for(int i = 0; i < N; i++){
-            String str = br.readLine();
-            String[] parts = str.split(" ");
-            String input = parts[0];
+            String[] part = br.readLine().split(" ");
             
-            if(input.equals("push_front")){
-                num = Integer.parseInt(parts[1]);
-                d.addFirst(num);
-            }else if(input.equals("push_back")){
-                num = Integer.parseInt(parts[1]);
-                d.addLast(num);
-            }else if(input.equals("pop_front")){
-                if(d.isEmpty()){
-                    System.out.println(-1);
-                }else{
-                n = d.getFirst();
-                System.out.println(n);
-                d.removeFirst();
-                }
-            }else if(input.equals("pop_back")){
-                if(d.isEmpty()){
-                    System.out.println(-1);
-                }else{
-                    n = d.getLast();
-                    System.out.println(n);
-                    d.removeLast();
-                }
-            }else if(input.equals("size")){
-                n = d.size();
-                System.out.println(n);
-            }else if(input.equals("empty")){
-                if(d.isEmpty()){
-                    System.out.println(1);
-                }else{
-                    System.out.println(0);
-                }
-            }else if(input.equals("front")){
-                if(d.isEmpty()){
-                    System.out.println(-1);
-                }else{
-                    n = d.peek();
-                    System.out.println(n);
-                }
-            }else if(input.equals("back")){
-                if(d.isEmpty()){
-                    System.out.println(-1);
-                }else{
-                    n = d.peekLast();
-                    System.out.println(n);
-                }
+            switch(part[0]){
+                    case"push_front": {
+                        dq.addFirst(Integer.parseInt(part[1]));
+                        break;
+                    }
+                    case"push_back": {
+                        dq.addLast(Integer.parseInt(part[1]));
+                        break;
+                    }
+                    case"pop_front": {
+                        if(dq.isEmpty()){
+                            sb.append(-1).append("\n");
+                        }else{
+                            sb.append(dq.pollFirst()).append("\n");
+                        }
+                        break;
+                    }
+                    case"pop_back": {
+                        if(dq.isEmpty()){
+                            sb.append(-1).append("\n");
+                        }else{
+                            sb.append(dq.pollLast()).append("\n");
+                        }
+                        break;
+                    }
+                    case"size": {
+                        sb.append(dq.size()).append("\n");
+                        break;
+                    }
+                    case"empty": {
+                        if(dq.isEmpty()){
+                            sb.append(1).append("\n");
+                        }else{
+                            sb.append(0).append("\n");
+                        }
+                        break;
+                    }
+                    case"front": {
+                        if(dq.isEmpty()){
+                            sb.append(-1).append("\n");
+                        }else{
+                            sb.append(dq.peekFirst()).append("\n");
+                        }
+                        break;
+                    }
+                    case"back": {
+                        if(dq.isEmpty()){
+                            sb.append(-1).append("\n");
+                        }else{
+                            sb.append(dq.peekLast()).append("\n");
+                        }
+                        break;
+                    }
             }
         }
+        System.out.println(sb);
     }
 }
