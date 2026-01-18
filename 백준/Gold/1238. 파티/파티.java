@@ -2,11 +2,10 @@ import java.util.*;
 import java.io.*;
 
 class Node implements Comparable<Node>{
-    int idx;
-    int cost;
+    int n, cost;
 
-    public Node(int idx, int cost){
-        this.idx = idx;
+    public Node(int n, int cost){
+        this.n = n;
         this.cost = cost;
     }
 
@@ -16,7 +15,7 @@ class Node implements Comparable<Node>{
 }
 
 class Main {
-    static final int INF = 1000000000;
+    static final int INF = 100_000_000;
     static int N, M, X;
     static ArrayList<Node>[] graph;
     static ArrayList<Node>[] reverse;
@@ -46,13 +45,13 @@ class Main {
             reverse[v].add(new Node(u, w));
         }
 
-        int[] home = dijkstra(graph);
-        int[] distX = dijkstra(reverse);
+        int[] party = dijkstra(graph);
+        int[] home = dijkstra(reverse);
 
         int answer = 0;
         for(int i = 1; i <= N; i++){
-            if(answer < home[i] + distX[i]){
-                answer = home[i] + distX[i];
+            if(answer < party[i] + home[i]){
+                answer = party[i] + home[i];
             }
         }
         System.out.println(answer);
@@ -68,15 +67,15 @@ class Main {
 
         while(!pq.isEmpty()){
             Node current = pq.poll();
-            int currentIdx = current.idx;
+            int currnetN = current.n;
             int currentCost = current.cost;
 
-            if(dist[currentIdx] < currentCost) continue;
+            if(dist[currnetN] < currentCost) continue;
 
-            for(Node next : node[currentIdx]){
-                if(dist[next.idx] > dist[currentIdx] + next.cost){
-                    dist[next.idx] = dist[currentIdx] + next.cost;
-                    pq.offer(new Node(next.idx, dist[next.idx]));
+            for(Node next : node[currnetN]){
+                if(dist[next.n] > dist[currnetN] + next.cost){
+                    dist[next.n] = dist[currnetN] + next.cost;
+                    pq.offer(new Node(next.n, dist[next.n]));
                 }
             }
         }
