@@ -1,16 +1,15 @@
-import java.util.*;
-
 class Solution {
-    static long left, right;
+    long left, right;
+    
     public long solution(int n, int[] times) {
         long answer = 0;
-        Arrays.sort(times);
         left = 1;
         right = (long)times[times.length - 1] * n;
         
         while(left <= right){
             long mid = (left + right) / 2;
             long sum = 0;
+            
             for(int time : times){
                 sum += mid / time;
             }
