@@ -6,9 +6,7 @@ class Solution {
     
     public int solution(String[] user_id, String[] banned_id) {
         visited = new boolean[user_id.length];
-        
         dfs(0, banned_id, user_id, new String[banned_id.length]);
-        
         return uniqueSets.size();
     }
     
@@ -33,17 +31,12 @@ class Solution {
     }
     
     private boolean isMatch(String userId, String bannedId){
-        if(userId.length() != bannedId.length()){
-            return false;
-        }
+        if(userId.length() != bannedId.length()) return false;
         
         for(int i = 0; i < userId.length(); i++){
             char b = bannedId.charAt(i);
-            if(b != '*' && b != userId.charAt(i)){
-                return false;
-            }
+            if(b != '*' && b != userId.charAt(i)) return false;
         }
-        
         return true;
     }
 }
