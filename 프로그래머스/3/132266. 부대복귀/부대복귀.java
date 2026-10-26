@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int n, int[][] roads, int[] sources, int destination) {
-        List<List<Integer>> graph = new ArrayList<>();
+        List<List<Integer>> graph = new  ArrayList<>();
         
         for(int i = 0; i <= n; i++){
             graph.add(new ArrayList<>());
@@ -37,6 +37,7 @@ class Solution {
         for(int i = 0; i < sources.length; i++){
             answer[i] = dist[sources[i]];
         }
+        
         return answer;
     }
 }
