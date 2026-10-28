@@ -18,9 +18,9 @@ class Solution {
             while(!current.equals("-")){
                 int up = money / 10;
                 answer[index.get(current)] += money - up;
+                current = parent.get(current);
                 
                 if(up == 0) break;
-                current = parent.get(current);
                 money = up;
             }
         }
